@@ -22,12 +22,23 @@ public class ServerGreeter extends Thread {
 				try {
 					System.out.println("Server Connecting");
 					Socket connection = server.accept();
+					System.out.println("Server Connected");
+					DataInputStream dis = new DataInputStream(connection.getInputStream());
+					DataOutputStream dos = new DataOutputStream(connection.getOutputStream());
+					dos.writeUTF("Message from server boi");
+					while(connection.isConnected()) {
+						System.out.println(dis.readUTF());
+					}
+					connection.close();
 				} catch(SocketTimeoutException e) {
 					e.printStackTrace();
+					b = false;
 				} catch (IOException e) {
 					e.printStackTrace();
+					b = false;
 				}
 			}
+			
 			//5. Make a try-catch block that checks for two types Exceptions: SocketTimeoutException and IOException.
 			//   Put steps 8 - 15 in the try block.
 		
@@ -58,6 +69,22 @@ public class ServerGreeter extends Thread {
 
 	public static void main(String[] args) {
 		//16. In a new thread, create an object of the ServerGreeter class and start the thread. Don't forget the try-catch.
+		try {
+			ServerGreeter sg = new ServerGreeter();
+			sg.start();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+//		Thread t = new Thread(()->{
+//			
+//		try {
+//			
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		});
 		
 	}
 }
