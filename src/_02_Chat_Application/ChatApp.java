@@ -20,26 +20,25 @@ public class ChatApp extends JFrame {
 	ChatApp() {
 		int response = JOptionPane.showConfirmDialog(null, "Would you like to host a connection?", "Buttons!", JOptionPane.YES_NO_OPTION);
 		if(response == JOptionPane.YES_OPTION) {
-			try {
-				JOptionPane.showMessageDialog(null, "Server started at: "+"Port: 8080");
-				JPanel p = new JPanel();
-				setTitle("Server");
-				JTextField tf = new JTextField();
-				p.add(tf);
-				p.add(new JButton->{
-					
-					
-				});
-				pack();
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+			setTitle("Server");
+			Server s = new Server(8080);
+			JOptionPane.showMessageDialog(null, "Server started at: "+s.getIPAddress()+"Port: 8080");
+			add(s);
+			this.setVisible(true);
+			this.pack();
+			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			s.start();
 		} else {
 			setTitle("Client");
-			
+			String ipStr = JOptionPane.showInputDialog("Enter the IP Address");
+			String prtStr = JOptionPane.showInputDialog("Enter the port number");
+			int port = Integer.parseInt(prtStr);
+			Client c = new Client(ipStr,port);
+			add(c);
+			this.setVisible(true);
+			this.pack();
+			this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+			c.Start();
 		}
 	}
 }

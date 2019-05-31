@@ -32,7 +32,6 @@ public class Client {
 
 			os.flush();
 
-			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

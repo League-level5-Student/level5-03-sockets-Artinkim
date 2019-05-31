@@ -13,7 +13,6 @@ public class ButtonClicker extends JFrame {
 	Server server;
 	Client client;
 	
-	
 	public static void main(String[] args) {
 		new ButtonClicker();
 	}
